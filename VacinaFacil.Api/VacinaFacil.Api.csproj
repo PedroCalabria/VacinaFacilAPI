@@ -12,8 +12,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Configuration\" />
     <Folder Include="Middleware\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Entity\VacinaFacil.Entity.csproj" />
+    <ProjectReference Include="..\VacinaFacil.Repository\VacinaFacil.Repository.csproj" />
   </ItemGroup>
 
 </Project>
