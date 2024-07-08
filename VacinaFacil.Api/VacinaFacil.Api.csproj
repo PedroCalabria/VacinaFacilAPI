@@ -17,6 +17,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Entity\VacinaFacil.Entity.csproj" />
+    <ProjectReference Include="..\VacinaFacil.Business.Interface\VacinaFacil.Business.Interface.csproj" />
+    <ProjectReference Include="..\VacinaFacil.Business\VacinaFacil.Business.csproj" />
     <ProjectReference Include="..\VacinaFacil.Repository\VacinaFacil.Repository.csproj" />
   </ItemGroup>
 

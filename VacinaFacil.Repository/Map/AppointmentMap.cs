@@ -10,10 +10,11 @@ namespace VacinaFacil.Repository.Map
         {
             builder.ToTable("tb_agendamento");
 
-            builder.HasKey(e => new { e.Id, e.IdPatient});
+            builder.HasKey(e => e.Id);
 
             builder.Property(e => e.Id)
                 .HasColumnName("id_agendamento")
+                .ValueGeneratedOnAdd()
                 .IsRequired();
 
             builder.Property(e => e.IdPatient)

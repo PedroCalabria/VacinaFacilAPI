@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using VacinaFacil.Entity.DTO;
 using VacinaFacil.Entity.Entities;
+using VacinaFacil.Entity.Model;
 using VacinaFacil.Repository.Interface.IRepositories;
 using VacinaFacil.Utils.Group;
 
@@ -15,8 +16,8 @@ namespace VacinaFacil.Repository.Repositories
         {
             var entity = EntitySet;
             var query = entity
-                .OrderBy(a => a.AppointmentDate)
-                .ThenBy(a => a.AppointmentTime)
+                .OrderBy(e => e.AppointmentDate)
+                .ThenBy(e => e.AppointmentTime)
                 .Select(appointment => new AppointmentDTO
                 {
                     Id = appointment.Id,
@@ -27,6 +28,34 @@ namespace VacinaFacil.Repository.Repositories
                 });
 
             return query.ToListAsync();
+        }
+
+        public Task<List<Appointment>> ConsultAppointments(DateTime date, TimeSpan time)
+        {
+            var query = EntitySet.Where(e => e.AppointmentDate == date && e.AppointmentTime == time);
+
+            return query.ToListAsync();
+        }
+
+        public Task<Appointment> InsertAppointment(InsertAppointmentModel appointment)
+        {
+            var newAppointment = new Appointment
+            {
+                Id = GetNextId(),
+                IdPatient = appointment.IdPatient,
+                AppointmentDate = appointment.AppointmentDate,
+                AppointmentTime = appointment.AppointmentTime,
+                Scheduled = appointment.Scheduled,
+                CriationDate = DateTime.Now
+            };
+
+            return Insert(newAppointment);
+        }
+
+        private int GetNextId()
+        {
+            var maxId = EntitySet.Max(e => (int?)e.Id) ?? 0;
+            return maxId + 1;
         }
     }
 }
