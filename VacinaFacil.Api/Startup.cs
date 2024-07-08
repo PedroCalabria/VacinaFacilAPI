@@ -2,24 +2,25 @@
 //using VacinaFacil.Api.Middleware;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
+using VacinaFacil.Api.Configuration;
 
 namespace VacinaFacil.Api
 {
     public class Startup
     {
-        public IConfiguration Configuracao { get; }
-        public Startup(IConfiguration configuracao)
+        public IConfiguration Configuration { get; }
+        public Startup(IConfiguration configuration)
         {
-            Configuracao = configuracao;
+            Configuration = configuration;
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
 
-            //services.AddDependencyInjectionConfiguration(Configuracao);
+            services.AddDependencyInjectionConfiguration();
 
-            //services.AddDatabaseConfiguration(Configuracao);
+            services.AddDatabaseConfiguration(Configuration);
 
             //services.AddFluentConfiguration();
 

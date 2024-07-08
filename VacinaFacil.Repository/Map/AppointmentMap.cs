@@ -1,0 +1,40 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using VacinaFacil.Entity.Entities;
+
+namespace VacinaFacil.Repository.Map
+{
+    public class AppointmentMap : IEntityTypeConfiguration<Appointment>
+    {
+        public void Configure(EntityTypeBuilder<Appointment> builder)
+        {
+            builder.ToTable("tb_agendamento");
+
+            builder.HasKey(e => new { e.Id, e.IdPatient});
+
+            builder.Property(e => e.Id)
+                .HasColumnName("id_agendamento")
+                .IsRequired();
+
+            builder.Property(e => e.IdPatient)
+                .HasColumnName("id_paciente")
+                .IsRequired();
+
+            builder.Property(e => e.AppointmentDate)
+                .HasColumnName("dat_agendamento")
+                .IsRequired();
+
+            builder.Property(e => e.AppointmentTime)
+                .HasColumnName("hor_agendamento")
+                .IsRequired();
+
+            builder.Property(e => e.Scheduled)
+                .HasColumnName("dsc_status")
+                .IsRequired();
+
+            builder.Property(e => e.CriationDate)
+                .HasColumnName("dat_criacao")
+                .IsRequired();
+        }
+    }
+}
