@@ -1,4 +1,6 @@
-﻿using VacinaFacil.Repository.Interface.IRepositories;
+﻿using VacinaFacil.Business.Businesses;
+using VacinaFacil.Business.Interface.IBusinesses;
+using VacinaFacil.Repository.Interface.IRepositories;
 using VacinaFacil.Repository.Repositories;
 
 namespace VacinaFacil.Api.Configuration
@@ -7,12 +9,18 @@ namespace VacinaFacil.Api.Configuration
     {
         public static void AddDependencyInjectionConfiguration(this IServiceCollection services)
         {
-            InjetarRepositorio(services);
+            InjectRepositories(services);
+            InjectBusinesses(services);
         }
 
-        private static void InjetarRepositorio(IServiceCollection services)
+        private static void InjectRepositories(IServiceCollection services)
         {
             services.AddScoped<IAppointmentRepository, AppointmentRepository>();
+        }
+
+        private static void InjectBusinesses(IServiceCollection services)
+        {
+            services.AddScoped<IAppointmentBusiness, AppointmentBusiness>();
         }
     }
 }
