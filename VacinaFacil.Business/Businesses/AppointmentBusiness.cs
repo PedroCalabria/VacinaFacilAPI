@@ -1,6 +1,5 @@
 ﻿using VacinaFacil.Business.Interface.IBusinesses;
 using VacinaFacil.Entity.DTO;
-using VacinaFacil.Entity.Entities;
 using VacinaFacil.Entity.Model;
 using VacinaFacil.Repository.Interface.IRepositories;
 
@@ -71,6 +70,8 @@ namespace VacinaFacil.Business.Businesses
             appointment.AppointmentTime = newAppointment.AppointmentTime;
             appointment.Scheduled = newAppointment.Scheduled;
             appointment.CriationDate = DateTime.Now;
+
+            await _appointmentRepository.Update(appointment);
 
             return await _appointmentRepository.ListAll();
         }
