@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using VacinaFacil.Business.Businesses;
 using VacinaFacil.Business.Interface.IBusinesses;
 using VacinaFacil.Entity.DTO;
 using VacinaFacil.Entity.Entities;
@@ -13,24 +14,38 @@ namespace VacinaFacil.Api.Controllers
     [Route("api/[controller]")]
     public class PatientController : ControllerBase
     {
-        private readonly IPatientRepository _patientRepository;
+        private readonly IPatientBusiness _patientBusiness;
 
-        public PatientController(IPatientRepository patientRepository)
+        public PatientController(IPatientBusiness patientBusiness)
         {
-            _patientRepository = patientRepository;
+            _patientBusiness = patientBusiness;
         }
-        
+
+        [HttpDelete("DeleteAppointment")]
+        [MandatoryTransaction]
+        public async Task<List<PatientDTO>> DeleteAppointment(int idPatient)
+        {
+            return await _patientBusiness.DeletePatient(idPatient);
+        }
+
         [HttpGet("GetListPatients")]
         public async Task<List<PatientDTO>> GetListAppointments()
         {
-            return await _patientRepository.ListAll();
+            return await _patientBusiness.ListPatients();
         }
 
         [HttpPost("InsertPatient")]
         [MandatoryTransaction]
-        public async Task<Patient> InsertAppointment(PatientModel patient)
+        public async Task<List<PatientDTO>> InsertAppointment(PatientModel patient)
         {
-            return await _patientRepository.InsertPatient(patient);
+            return await _patientBusiness.InsertPatient(patient);
+        }
+
+        [HttpPut("UpdateAppointment")]
+        [MandatoryTransaction]
+        public async Task<List<PatientDTO>> UpdateAppointment(int idPatient, PatientModel newPatient)
+        {
+            return await _patientBusiness.UpdatePatient(idPatient, newPatient);
         }
 
     }
