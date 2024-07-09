@@ -53,7 +53,6 @@ namespace VacinaFacil.Business.Businesses
 
         public async Task<List<AppointmentDTO>> ListAppointments()
         {
-            _log.InfoFormat(BusinessMessages.SuccessfulOperation);
             return await _appointmentRepository.ListAll();
         }
 

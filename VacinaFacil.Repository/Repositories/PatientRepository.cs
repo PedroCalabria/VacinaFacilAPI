@@ -37,5 +37,10 @@ namespace VacinaFacil.Repository.Repositories
 
             return query.ToListAsync();
         }
+
+        public Task<Patient> getPatient(string name, DateTime birthDate)
+        {
+            return EntitySet.FirstOrDefaultAsync(p => p.Name == name && p.BirthDate == birthDate);
+        }
     }
 }

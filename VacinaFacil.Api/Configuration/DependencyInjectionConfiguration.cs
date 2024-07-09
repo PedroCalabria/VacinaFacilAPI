@@ -33,6 +33,7 @@ namespace VacinaFacil.Api.Configuration
         private static void InjectBusinesses(IServiceCollection services)
         {
             services.AddScoped<IAppointmentBusiness, AppointmentBusiness>();
+            services.AddScoped<IPatientBusiness, PatientBusiness>();
         }
     }
 }

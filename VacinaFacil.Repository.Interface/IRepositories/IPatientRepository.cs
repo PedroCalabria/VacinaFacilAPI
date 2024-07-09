@@ -13,5 +13,6 @@ namespace VacinaFacil.Repository.Interface.IRepositories
     {
         Task<List<PatientDTO>> ListAll();
         Task<Patient> InsertPatient(PatientModel patient);
+        Task<Patient> getPatient(string name, DateTime birthDate);
     }
 }
