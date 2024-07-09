@@ -1,12 +1,16 @@
-﻿using VacinaFacil.Business.Interface.IBusinesses;
+﻿using log4net;
+using VacinaFacil.Business.Interface.IBusinesses;
 using VacinaFacil.Entity.DTO;
 using VacinaFacil.Entity.Model;
 using VacinaFacil.Repository.Interface.IRepositories;
+using VacinaFacil.Utils.Exceptions;
+using VacinaFacil.Utils.Messages;
 
 namespace VacinaFacil.Business.Businesses
 {
     public class AppointmentBusiness : IAppointmentBusiness
     {
+        private static readonly ILog _log = LogManager.GetLogger(typeof(AppointmentBusiness));
         private readonly IAppointmentRepository _appointmentRepository;
 
         public AppointmentBusiness(IAppointmentRepository appointmentRepository)
@@ -18,15 +22,15 @@ namespace VacinaFacil.Business.Businesses
         {
             var appointment = await _appointmentRepository.getByID(idAppointment);
 
-            if (appointment != null)
+            if (appointment == null)
             {
-                await _appointmentRepository.Delete(appointment);
-            }
-            else
-            {
-                throw new Exception();
+                _log.InfoFormat(BusinessMessages.RecordNotFound);
+                throw new BusinessException(BusinessMessages.RecordNotFound);
             }
 
+            await _appointmentRepository.Delete(appointment);
+
+            _log.InfoFormat(BusinessMessages.SuccessfulOperation);
             return await _appointmentRepository.ListAll();
 
         }
@@ -37,16 +41,19 @@ namespace VacinaFacil.Business.Businesses
             
             if (!appointmentAvailability)
             {
-                throw new Exception();
+                _log.InfoFormat(string.Format(BusinessMessages.ExistingRecord, new { appointment.AppointmentDate, appointment.AppointmentTime }));
+                throw new BusinessException(string.Format(BusinessMessages.ExistingRecord, new { appointment.AppointmentDate, appointment.AppointmentTime }));
             }
 
             await _appointmentRepository.InsertAppointment(appointment);
 
+            _log.InfoFormat(BusinessMessages.SuccessfulOperation);
             return await _appointmentRepository.ListAll();
         }
 
         public async Task<List<AppointmentDTO>> ListAppointments()
         {
+            _log.InfoFormat(BusinessMessages.SuccessfulOperation);
             return await _appointmentRepository.ListAll();
         }
 
@@ -56,14 +63,16 @@ namespace VacinaFacil.Business.Businesses
 
             if (appointment == null)
             {
-                throw new Exception();
+                _log.InfoFormat(BusinessMessages.RecordNotFound);
+                throw new BusinessException(BusinessMessages.RecordNotFound);
             }
 
             var appointmentAvailability = await CheckAppointmentAvailability(newAppointment.AppointmentDate, newAppointment.AppointmentTime);
 
             if (!appointmentAvailability)
             {
-                throw new Exception();
+                _log.InfoFormat(BusinessMessages.AppointmentNotAvailable);
+                throw new BusinessException(BusinessMessages.AppointmentNotAvailable);
             }
 
             appointment.AppointmentDate = newAppointment.AppointmentDate;
@@ -73,6 +82,7 @@ namespace VacinaFacil.Business.Businesses
 
             await _appointmentRepository.Update(appointment);
 
+            _log.InfoFormat(BusinessMessages.SuccessfulOperation);
             return await _appointmentRepository.ListAll();
         }
 

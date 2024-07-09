@@ -5,12 +5,15 @@ using System.Diagnostics;
 using System.Net;
 using VacinaFacil.Repository.Interface;
 using VacinaFacil.Utils.Attributes;
+using VacinaFacil.Utils.Exceptions;
+using VacinaFacil.Utils.Messages;
 using VacinaFacil.Utils.Responses;
 
 namespace VacinaFacil.Api.Middleware
 {
     public class ApiMiddleware : IMiddleware
     {
+        private static readonly ILog _log = LogManager.GetLogger(typeof(ApiMiddleware));
         private readonly ITransactionManager _transactionManager;
 
         public ApiMiddleware(ITransactionManager transactionManager)
@@ -42,6 +45,7 @@ namespace VacinaFacil.Api.Middleware
 
 
                 stopwatch.Stop();
+                _log.InfoFormat(string.Format(InfraMessages.ExecutionCompleted, context.Request.Method, context.Request.Path, stopwatch.ElapsedMilliseconds));
             }
             catch (Exception ex)
             {
@@ -63,7 +67,15 @@ namespace VacinaFacil.Api.Middleware
 
             var messages = new List<string>();
 
-            messages.Add("Ocooreu um erro, contate o administrador.");
+            switch (ex)
+            {
+                case BusinessException:
+                    messages.Add(ex.Message);
+                    break;
+                default:
+                    messages.Add(InfraMessages.UnexpectedError);
+                    break;
+            }
 
             await response.WriteAsync(JsonConvert.SerializeObject(new DefaultResponse(HttpStatusCode.InternalServerError, messages)));
         }
