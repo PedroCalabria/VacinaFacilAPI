@@ -3,6 +3,7 @@
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using VacinaFacil.Api.Configuration;
+using VacinaFacil.Api.Middleware;
 
 namespace VacinaFacil.Api
 {
@@ -70,8 +71,7 @@ namespace VacinaFacil.Api
             app.UseAuthentication();
             app.UseAuthorization();
 
-            //app.UseMiddleware<ApiMiddleware>();
-            //app.UseMiddleware<UsuarioContextoMiddleware>();
+            app.UseMiddleware<ApiMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

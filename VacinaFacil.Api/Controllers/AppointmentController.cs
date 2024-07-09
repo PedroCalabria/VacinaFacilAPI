@@ -2,6 +2,7 @@
 using VacinaFacil.Business.Interface.IBusinesses;
 using VacinaFacil.Entity.DTO;
 using VacinaFacil.Entity.Model;
+using VacinaFacil.Utils.Attributes;
 
 namespace VacinaFacil.Api.Controllers
 {
@@ -17,6 +18,7 @@ namespace VacinaFacil.Api.Controllers
         }
 
         [HttpDelete("DeleteAppointment")]
+        [MandatoryTransaction]
         public async Task<List<AppointmentDTO>> DeleteAppointment(int idAppointment)
         {
             return await _appointmentBusiness.DeleteAppointment(idAppointment);
@@ -29,12 +31,14 @@ namespace VacinaFacil.Api.Controllers
         }
 
         [HttpPost("InsertAppointment")]
+        [MandatoryTransaction]
         public async Task<List<AppointmentDTO>> InsertAppointment(InsertAppointmentModel appointment)
         {
             return await _appointmentBusiness.InsertAppointment(appointment);
         }
 
         [HttpPut("UpdateAppointment")]
+        [MandatoryTransaction]
         public async Task<List<AppointmentDTO>> UpdateAppointment(int idAppointment, UpdateAppointmentModel newAppointment)
         {
             return await _appointmentBusiness.UpdateAppointment(idAppointment, newAppointment);

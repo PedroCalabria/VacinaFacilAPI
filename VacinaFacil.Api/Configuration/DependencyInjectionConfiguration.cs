@@ -1,5 +1,8 @@
-﻿using VacinaFacil.Business.Businesses;
+﻿using VacinaFacil.Api.Middleware;
+using VacinaFacil.Business.Businesses;
 using VacinaFacil.Business.Interface.IBusinesses;
+using VacinaFacil.Repository;
+using VacinaFacil.Repository.Interface;
 using VacinaFacil.Repository.Interface.IRepositories;
 using VacinaFacil.Repository.Repositories;
 
@@ -11,6 +14,14 @@ namespace VacinaFacil.Api.Configuration
         {
             InjectRepositories(services);
             InjectBusinesses(services);
+            InjectMiddlewares(services);
+
+            services.AddScoped<ITransactionManager, TransactionManager>();
+        }
+
+        private static void InjectMiddlewares(IServiceCollection services)
+        {
+            services.AddTransient<ApiMiddleware>();
         }
 
         private static void InjectRepositories(IServiceCollection services)
