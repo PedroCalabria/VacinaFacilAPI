@@ -27,6 +27,7 @@ namespace VacinaFacil.Api.Configuration
         private static void InjectRepositories(IServiceCollection services)
         {
             services.AddScoped<IAppointmentRepository, AppointmentRepository>();
+            services.AddScoped<IPatientRepository, PatientRepository>();
         }
 
         private static void InjectBusinesses(IServiceCollection services)
