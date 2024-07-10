@@ -19,27 +19,33 @@ namespace VacinaFacil.Api.Controllers
 
         [HttpDelete("DeleteAppointment")]
         [MandatoryTransaction]
-        public async Task<List<AppointmentDTO>> DeleteAppointment(int idAppointment)
+        public async Task<List<GroupedAppointmentDTO>> DeleteAppointment(int idAppointment)
         {
             return await _appointmentBusiness.DeleteAppointment(idAppointment);
         }
         
         [HttpGet("GetListAppointments")]
-        public async Task<List<AppointmentDTO>> GetListAppointments()
+        public async Task<List<GroupedAppointmentDTO>> GetListAppointments()
         {
             return await _appointmentBusiness.ListAppointments();
         }
 
+        [HttpGet("GetListAppointmentsByDate")]
+        public async Task<List<GroupedAppointmentDTO>> GetListAppointmentsByDate(DateTime date)
+        {
+            return await _appointmentBusiness.ListAppointmentsByDate(date);
+        }
+
         [HttpPost("InsertAppointment")]
         [MandatoryTransaction]
-        public async Task<List<AppointmentDTO>> InsertAppointment(InsertAppointmentModel appointment)
+        public async Task<List<GroupedAppointmentDTO>> InsertAppointment(InsertAppointmentModel appointment)
         {
             return await _appointmentBusiness.InsertAppointment(appointment);
         }
 
         [HttpPut("UpdateAppointment")]
         [MandatoryTransaction]
-        public async Task<List<AppointmentDTO>> UpdateAppointment(int idAppointment, UpdateAppointmentModel newAppointment)
+        public async Task<List<GroupedAppointmentDTO>> UpdateAppointment(int idAppointment, UpdateAppointmentModel newAppointment)
         {
             return await _appointmentBusiness.UpdateAppointment(idAppointment, newAppointment);
         }

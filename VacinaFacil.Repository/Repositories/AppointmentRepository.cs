@@ -4,7 +4,6 @@ using VacinaFacil.Entity.DTO;
 using VacinaFacil.Entity.Entities;
 using VacinaFacil.Entity.Model;
 using VacinaFacil.Repository.Interface.IRepositories;
-using VacinaFacil.Utils.Group;
 
 namespace VacinaFacil.Repository.Repositories
 {
@@ -12,29 +11,51 @@ namespace VacinaFacil.Repository.Repositories
     {
         public AppointmentRepository(Context context) : base(context) { }
 
-        public Task<List<AppointmentDTO>> ListAll()
+        public async Task<List<GroupedAppointmentDTO>> ListAll()
         {
             var entity = EntitySet;
             var query = entity
-                .OrderBy(e => e.AppointmentDate)
-                .ThenBy(e => e.AppointmentTime)
-                .Select(appointment => new AppointmentDTO
+                .GroupBy(a => new { a.AppointmentDate, a.AppointmentTime })
+                .Select(g => new GroupedAppointmentDTO
                 {
-                    Id = appointment.Id,
-                    AppointmentDate = appointment.AppointmentDate,
-                    AppointmentTime = appointment.AppointmentTime,
-                    Scheduled = appointment.Scheduled,
-                    CriationDate = appointment.CriationDate
+                    AppointmentDate = g.Key.AppointmentDate,
+                    AppointmentTime = g.Key.AppointmentTime,
+                    Appointments = g.Select(a => new AppointmentDTO
+                    {
+                        Id = a.Id,
+                        AppointmentDate = a.AppointmentDate,
+                        AppointmentTime = a.AppointmentTime,
+                        Scheduled = a.Scheduled,
+                        CriationDate = a.CriationDate,
+                    }).ToList(),
+                    Count = g.Count()
                 });
 
-            return query.ToListAsync();
+            return await query.ToListAsync();
         }
 
-        public Task<List<Appointment>> ConsultAppointments(DateTime date, TimeSpan time)
+        public async Task<List<GroupedAppointmentDTO>> ListByDate(DateTime date)
         {
-            var query = EntitySet.Where(e => e.AppointmentDate == date && e.AppointmentTime == time);
+            var entity = EntitySet;
+            var query = entity
+                .Where(a => a.AppointmentDate == date)
+                .GroupBy(a => a.AppointmentTime)
+                .Select(g => new GroupedAppointmentDTO
+                {
+                    AppointmentDate = date,
+                    AppointmentTime = g.Key,
+                    Appointments = g.Select(a => new AppointmentDTO
+                                    {
+                                        Id = a.Id,
+                                        AppointmentDate = a.AppointmentDate,
+                                        AppointmentTime = a.AppointmentTime,
+                                        Scheduled = a.Scheduled,
+                                        CriationDate = a.CriationDate,
+                                    }).ToList(),
+                    Count = g.Count()
+                });
 
-            return query.ToListAsync();
+            return await query.ToListAsync();
         }
 
         public Task<Appointment> InsertAppointment(InsertAppointmentModel appointment)
