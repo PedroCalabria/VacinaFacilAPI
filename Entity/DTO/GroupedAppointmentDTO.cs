@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace VacinaFacil.Utils.Group
+namespace VacinaFacil.Entity.DTO
 {
-    public class AppointmentGroup
+    public class GroupedAppointmentDTO
     {
         public DateTime AppointmentDate { get; set; }
         public TimeSpan AppointmentTime { get; set; }
+        public List<AppointmentDTO> Appointments { get; set; }
+        public int Count { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace VacinaFacil.Business.Businesses
             _appointmentRepository = appointmentRepository;
         }
 
-        public async Task<List<AppointmentDTO>> DeleteAppointment(int idAppointment)
+        public async Task<List<GroupedAppointmentDTO>> DeleteAppointment(int idAppointment)
         {
             var appointment = await _appointmentRepository.getByID(idAppointment);
 
@@ -35,7 +35,7 @@ namespace VacinaFacil.Business.Businesses
 
         }
 
-        public async Task<List<AppointmentDTO>> InsertAppointment(InsertAppointmentModel appointment)
+        public async Task<List<GroupedAppointmentDTO>> InsertAppointment(InsertAppointmentModel appointment)
         {
             var appointmentAvailability = await CheckAppointmentAvailability(appointment.AppointmentDate, appointment.AppointmentTime);
             
@@ -51,12 +51,18 @@ namespace VacinaFacil.Business.Businesses
             return await _appointmentRepository.ListAll();
         }
 
-        public async Task<List<AppointmentDTO>> ListAppointments()
+        public async Task<List<GroupedAppointmentDTO>> ListAppointments()
         {
             return await _appointmentRepository.ListAll();
+
         }
 
-        public async Task<List<AppointmentDTO>> UpdateAppointment(int idAppointment, UpdateAppointmentModel newAppointment)
+        public async Task<List<GroupedAppointmentDTO>> ListAppointmentsByDate(DateTime date)
+        {
+            return await _appointmentRepository.ListByDate(date);
+        }
+
+        public async Task<List<GroupedAppointmentDTO>> UpdateAppointment(int idAppointment, UpdateAppointmentModel newAppointment)
         {
             var appointment = await _appointmentRepository.getByID(idAppointment);
 
@@ -87,9 +93,11 @@ namespace VacinaFacil.Business.Businesses
 
         private async Task<bool> CheckAppointmentAvailability(DateTime date, TimeSpan time)
         {
-            var appointments = await _appointmentRepository.ConsultAppointments(date, time);
+            var appointments = await _appointmentRepository.ListByDate(date);
+            var appointmentsDay = appointments.Sum(a => a.Count);
+            var appointmentsTime = appointments.Find(a => a.AppointmentTime == time)?.Count ?? 0;
 
-            if (appointments.Count >= 2)
+            if (appointmentsDay >= 20 || appointmentsTime >= 2)
             {
                 return false;
             }

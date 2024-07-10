@@ -11,8 +11,8 @@ namespace VacinaFacil.Repository.Interface.IRepositories
 {
     public interface IAppointmentRepository : IBaseRepository<Appointment>
     {
-        Task<List<AppointmentDTO>> ListAll();
-        Task<List<Appointment>> ConsultAppointments(DateTime date, TimeSpan time);
+        Task<List<GroupedAppointmentDTO>> ListAll();
+        Task<List<GroupedAppointmentDTO>> ListByDate(DateTime date);
         Task<Appointment> InsertAppointment(InsertAppointmentModel appointment);
     }
 }
