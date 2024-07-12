@@ -31,6 +31,7 @@ namespace VacinaFacil.Repository.Map
 
             builder.Property(e => e.Scheduled)
                 .HasColumnName("dsc_status")
+                .HasConversion<string>()
                 .IsRequired();
 
             builder.Property(e => e.CriationDate)

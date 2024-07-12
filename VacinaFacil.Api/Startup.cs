@@ -1,6 +1,4 @@
-﻿//using VacinaFacil.Api.Configuration;
-//using VacinaFacil.Api.Middleware;
-using Microsoft.OpenApi.Any;
+﻿using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using VacinaFacil.Api.Configuration;
 using VacinaFacil.Api.Middleware;
@@ -23,9 +21,7 @@ namespace VacinaFacil.Api
 
             services.AddDatabaseConfiguration(Configuration);
 
-            //services.AddFluentConfiguration();
-
-            //services.AddAutorizacaoConfiguration(Configuracao);
+            services.AddFluentConfiguration();
 
             services.AddSwaggerGen(c =>
             {

@@ -11,7 +11,7 @@ namespace VacinaFacil.Repository.Repositories
     {
         public AppointmentRepository(Context context) : base(context) { }
 
-        public async Task<List<GroupedAppointmentDTO>> ListAll()
+        public Task<List<GroupedAppointmentDTO>> ListAll()
         {
             var entity = EntitySet;
             var query = entity
@@ -31,10 +31,10 @@ namespace VacinaFacil.Repository.Repositories
                     Count = g.Count()
                 });
 
-            return await query.ToListAsync();
+            return query.ToListAsync();
         }
 
-        public async Task<List<GroupedAppointmentDTO>> ListByDate(DateTime date)
+        public Task<List<GroupedAppointmentDTO>> ListByDate(DateTime date)
         {
             var entity = EntitySet;
             var query = entity
@@ -55,7 +55,7 @@ namespace VacinaFacil.Repository.Repositories
                     Count = g.Count()
                 });
 
-            return await query.ToListAsync();
+            return query.ToListAsync();
         }
 
         public Task<Appointment> InsertAppointment(InsertAppointmentModel appointment)
