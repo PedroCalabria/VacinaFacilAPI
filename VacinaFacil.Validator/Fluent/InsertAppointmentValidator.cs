@@ -15,7 +15,7 @@ namespace VacinaFacil.Validator.Fluent
         public InsertAppointmentValidator()
         {
             RuleFor(appointment => appointment.IdPatient)
-                .GreaterThan(0).WithMessage(string.Format(BusinessMessages.MinValueField, "IdPatient"));
+                .GreaterThan(0).WithMessage(string.Format(BusinessMessages.MinValueField, "IdPatient", 1));
 
             RuleFor(appointment => appointment.AppointmentDate)
                 .NotEmpty().WithMessage(string.Format(BusinessMessages.MandatoryField, "AppointmentDate"))

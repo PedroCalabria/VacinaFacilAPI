@@ -14,7 +14,6 @@ namespace VacinaFacil.Repository.Map
 
             builder.Property(e => e.Id)
                 .HasColumnName("id_paciente")
-                .ValueGeneratedOnAdd()
                 .IsRequired();
 
             builder.Property(e => e.Name)
