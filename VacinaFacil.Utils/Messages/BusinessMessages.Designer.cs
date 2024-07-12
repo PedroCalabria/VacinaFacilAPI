@@ -70,6 +70,15 @@ namespace VacinaFacil.Utils.Messages {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O campo {0} está fora do intervalo permitido..
+        /// </summary>
+        public static string EnumOutOfRange {
+            get {
+                return ResourceManager.GetString("EnumOutOfRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Registro &apos;{0}&apos; já existe na base..
         /// </summary>
         public static string ExistingRecord {
@@ -97,6 +106,15 @@ namespace VacinaFacil.Utils.Messages {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a A data de {0} deve ser anterior a {1}..
+        /// </summary>
+        public static string MaxDate {
+            get {
+                return ResourceManager.GetString("MaxDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a O campo &apos;{0}&apos; deve possuir no máximo {1} caracters..
         /// </summary>
         public static string MaxSizeField {
@@ -106,11 +124,29 @@ namespace VacinaFacil.Utils.Messages {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a A data de {0} deve ser após {1}..
+        /// </summary>
+        public static string MinDate {
+            get {
+                return ResourceManager.GetString("MinDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a O campo &apos;{0}&apos; deve possuir no mínimo {1} caracters..
         /// </summary>
         public static string MinSizeField {
             get {
                 return ResourceManager.GetString("MinSizeField", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O valor do campo &apos;{0}&apos; deve ser no mínimo {1}..
+        /// </summary>
+        public static string MinValueField {
+            get {
+                return ResourceManager.GetString("MinValueField", resourceCulture);
             }
         }
         

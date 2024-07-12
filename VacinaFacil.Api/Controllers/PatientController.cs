@@ -21,29 +21,29 @@ namespace VacinaFacil.Api.Controllers
             _patientBusiness = patientBusiness;
         }
 
-        [HttpDelete("DeleteAppointment")]
+        [HttpDelete("DeletePatient")]
         [MandatoryTransaction]
-        public async Task<List<PatientDTO>> DeleteAppointment(int idPatient)
+        public async Task<List<PatientDTO>> DeletePatient(int idPatient)
         {
             return await _patientBusiness.DeletePatient(idPatient);
         }
 
         [HttpGet("GetListPatients")]
-        public async Task<List<PatientDTO>> GetListAppointments()
+        public async Task<List<PatientDTO>> GetListPatients()
         {
             return await _patientBusiness.ListPatients();
         }
 
         [HttpPost("InsertPatient")]
         [MandatoryTransaction]
-        public async Task<List<PatientDTO>> InsertAppointment(PatientModel patient)
+        public async Task<List<PatientDTO>> InsertPatient(PatientModel patient)
         {
             return await _patientBusiness.InsertPatient(patient);
         }
 
-        [HttpPut("UpdateAppointment")]
+        [HttpPut("UpdatePatient")]
         [MandatoryTransaction]
-        public async Task<List<PatientDTO>> UpdateAppointment(int idPatient, PatientModel newPatient)
+        public async Task<List<PatientDTO>> UpdatePatient(int idPatient, PatientModel newPatient)
         {
             return await _patientBusiness.UpdatePatient(idPatient, newPatient);
         }
