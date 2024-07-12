@@ -1,6 +1,7 @@
 ﻿using log4net;
 using VacinaFacil.Business.Interface.IBusinesses;
 using VacinaFacil.Entity.DTO;
+using VacinaFacil.Entity.Entities;
 using VacinaFacil.Entity.Model;
 using VacinaFacil.Repository.Interface.IRepositories;
 using VacinaFacil.Utils.Exceptions;
@@ -37,13 +38,7 @@ namespace VacinaFacil.Business.Businesses
 
         public async Task<List<GroupedAppointmentDTO>> InsertAppointment(InsertAppointmentModel appointment)
         {
-            var appointmentAvailability = await CheckAppointmentAvailability(appointment.AppointmentDate, appointment.AppointmentTime);
-            
-            if (!appointmentAvailability)
-            {
-                _log.InfoFormat(string.Format(BusinessMessages.ExistingRecord, new { appointment.AppointmentDate, appointment.AppointmentTime }));
-                throw new BusinessException(string.Format(BusinessMessages.ExistingRecord, new { appointment.AppointmentDate, appointment.AppointmentTime }));
-            }
+            await CheckAppointmentAvailability(appointment.AppointmentDate, appointment.AppointmentTime, appointment.IdPatient);
 
             await _appointmentRepository.InsertAppointment(appointment);
 
@@ -72,13 +67,7 @@ namespace VacinaFacil.Business.Businesses
                 throw new BusinessException(BusinessMessages.RecordNotFound);
             }
 
-            var appointmentAvailability = await CheckAppointmentAvailability(newAppointment.AppointmentDate, newAppointment.AppointmentTime);
-
-            if (!appointmentAvailability)
-            {
-                _log.InfoFormat(BusinessMessages.AppointmentNotAvailable);
-                throw new BusinessException(BusinessMessages.AppointmentNotAvailable);
-            }
+            await CheckAppointmentAvailability(newAppointment.AppointmentDate, newAppointment.AppointmentTime);
 
             appointment.AppointmentDate = newAppointment.AppointmentDate;
             appointment.AppointmentTime = newAppointment.AppointmentTime;
@@ -91,18 +80,43 @@ namespace VacinaFacil.Business.Businesses
             return await _appointmentRepository.ListAll();
         }
 
-        private async Task<bool> CheckAppointmentAvailability(DateTime date, TimeSpan time)
+        private async Task CheckAppointmentAvailability(DateTime date, TimeSpan time, int idPatient)
         {
             var appointments = await _appointmentRepository.ListByDate(date);
+
+            var patientHasAppointmentAtTime = appointments
+                .Exists(a => a.AppointmentTime == time && a.Appointments.Any(app => app.IdPatient == idPatient));
+
+            if (patientHasAppointmentAtTime)
+            {
+                _log.InfoFormat(string.Format(BusinessMessages.ExistingRecord, new { date, time }));
+                throw new BusinessException(string.Format(BusinessMessages.ExistingRecord, new { date, time }));
+            }
+
+            var appointmentsDay = appointments.Sum(a => a.Count);
+            var appointmentsTime = appointments.Find(a => a.AppointmentTime == time)?.Count ?? 0;
+
+
+            if (appointmentsDay >= 20 || appointmentsTime >= 2)
+            {
+                _log.InfoFormat(BusinessMessages.AppointmentNotAvailable);
+                throw new BusinessException(BusinessMessages.AppointmentNotAvailable);
+            }
+
+        }
+
+        private async Task CheckAppointmentAvailability(DateTime date, TimeSpan time)
+        {
+            var appointments = await _appointmentRepository.ListByDate(date);
+
             var appointmentsDay = appointments.Sum(a => a.Count);
             var appointmentsTime = appointments.Find(a => a.AppointmentTime == time)?.Count ?? 0;
 
             if (appointmentsDay >= 20 || appointmentsTime >= 2)
             {
-                return false;
+                _log.InfoFormat(BusinessMessages.AppointmentNotAvailable);
+                throw new BusinessException(BusinessMessages.AppointmentNotAvailable);
             }
-
-            return true;
         }
     }
 }
