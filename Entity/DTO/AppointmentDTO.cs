@@ -10,6 +10,7 @@ namespace VacinaFacil.Entity.DTO
     public class AppointmentDTO
     {
         public int Id { get; set; }
+        public int IdPatient { get; set; }
         public DateTime AppointmentDate { get; set; }
         public TimeSpan AppointmentTime { get; set; }
         public ScheduledEnum Scheduled { get; set; }

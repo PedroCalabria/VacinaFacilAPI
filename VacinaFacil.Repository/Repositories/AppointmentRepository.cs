@@ -23,6 +23,7 @@ namespace VacinaFacil.Repository.Repositories
                     Appointments = g.Select(a => new AppointmentDTO
                     {
                         Id = a.Id,
+                        IdPatient = a.IdPatient,
                         AppointmentDate = a.AppointmentDate,
                         AppointmentTime = a.AppointmentTime,
                         Scheduled = a.Scheduled,
@@ -47,6 +48,7 @@ namespace VacinaFacil.Repository.Repositories
                     Appointments = g.Select(a => new AppointmentDTO
                                     {
                                         Id = a.Id,
+                                        IdPatient = a.IdPatient,
                                         AppointmentDate = a.AppointmentDate,
                                         AppointmentTime = a.AppointmentTime,
                                         Scheduled = a.Scheduled,
