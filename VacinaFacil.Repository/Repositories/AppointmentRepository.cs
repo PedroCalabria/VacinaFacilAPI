@@ -62,7 +62,6 @@ namespace VacinaFacil.Repository.Repositories
         {
             var newAppointment = new Appointment
             {
-                Id = GetNextId(),
                 IdPatient = appointment.IdPatient,
                 AppointmentDate = appointment.AppointmentDate,
                 AppointmentTime = appointment.AppointmentTime,
@@ -71,12 +70,6 @@ namespace VacinaFacil.Repository.Repositories
             };
 
             return Insert(newAppointment);
-        }
-
-        private int GetNextId()
-        {
-            var maxId = EntitySet.Max(e => (int?)e.Id) ?? 0;
-            return maxId + 1;
         }
     }
 }
