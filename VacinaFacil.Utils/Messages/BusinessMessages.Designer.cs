@@ -79,6 +79,15 @@ namespace VacinaFacil.Utils.Messages {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O usuário já tem um agendamento para o dia e horário especificado..
+        /// </summary>
+        public static string ExistingAppointment {
+            get {
+                return ResourceManager.GetString("ExistingAppointment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a Registro &apos;{0}&apos; já existe na base..
         /// </summary>
         public static string ExistingRecord {

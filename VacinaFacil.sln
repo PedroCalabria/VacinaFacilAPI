@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VacinaFacil.Api", "VacinaFa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VacinaFacil.Utils", "VacinaFacil.Utils\VacinaFacil.Utils.csproj", "{8AC23750-7599-4180-ABFF-D1DE659309AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VacinaFacil.Validator", "VacinaFacil.Validator\VacinaFacil.Validator.csproj", "{65CBEF57-B277-49FA-B50A-1ADDFF86F47C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VacinaFacil.Validator", "VacinaFacil.Validator\VacinaFacil.Validator.csproj", "{65CBEF57-B277-49FA-B50A-1ADDFF86F47C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VacinaFacil.UnitTests", "VacinaFacil.UnitTests\VacinaFacil.UnitTests.csproj", "{8240B565-3976-4191-9919-389163D352DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{65CBEF57-B277-49FA-B50A-1ADDFF86F47C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65CBEF57-B277-49FA-B50A-1ADDFF86F47C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65CBEF57-B277-49FA-B50A-1ADDFF86F47C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8240B565-3976-4191-9919-389163D352DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8240B565-3976-4191-9919-389163D352DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8240B565-3976-4191-9919-389163D352DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8240B565-3976-4191-9919-389163D352DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

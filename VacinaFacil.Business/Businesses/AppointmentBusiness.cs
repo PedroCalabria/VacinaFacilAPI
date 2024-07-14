@@ -49,7 +49,6 @@ namespace VacinaFacil.Business.Businesses
         public async Task<List<GroupedAppointmentDTO>> ListAppointments()
         {
             return await _appointmentRepository.ListAll();
-
         }
 
         public async Task<List<GroupedAppointmentDTO>> ListAppointmentsByDate(DateTime date)
@@ -89,8 +88,8 @@ namespace VacinaFacil.Business.Businesses
 
             if (patientHasAppointmentAtTime)
             {
-                _log.InfoFormat(string.Format(BusinessMessages.ExistingRecord, new { date, time }));
-                throw new BusinessException(string.Format(BusinessMessages.ExistingRecord, new { date, time }));
+                _log.InfoFormat(string.Format(BusinessMessages.ExistingAppointment));
+                throw new BusinessException(string.Format(BusinessMessages.ExistingAppointment));
             }
 
             var appointmentsDay = appointments.Sum(a => a.Count);

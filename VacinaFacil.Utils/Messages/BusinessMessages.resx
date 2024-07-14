@@ -123,6 +123,9 @@
   <data name="EnumOutOfRange" xml:space="preserve">
     <value>O campo {0} está fora do intervalo permitido.</value>
   </data>
+  <data name="ExistingAppointment" xml:space="preserve">
+    <value>O usuário já tem um agendamento para o dia e horário especificado.</value>
+  </data>
   <data name="ExistingRecord" xml:space="preserve">
     <value>Registro '{0}' já existe na base.</value>
   </data>
