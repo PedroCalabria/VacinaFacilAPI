@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using VacinaFacil.Business.Businesses;
 using VacinaFacil.Business.Interface.IBusinesses;
 using VacinaFacil.Entity.DTO;
@@ -23,6 +24,7 @@ namespace VacinaFacil.Api.Controllers
 
         [HttpDelete("DeletePatient")]
         [MandatoryTransaction]
+        [Authorize]
         public async Task<List<PatientDTO>> DeletePatient(int idPatient)
         {
             return await _patientBusiness.DeletePatient(idPatient);
@@ -36,14 +38,15 @@ namespace VacinaFacil.Api.Controllers
 
         [HttpPost("InsertPatient")]
         [MandatoryTransaction]
-        public async Task<List<PatientDTO>> InsertPatient(PatientModel patient)
+        public async Task<List<PatientDTO>> InsertPatient(InsertPatientModel patient)
         {
             return await _patientBusiness.InsertPatient(patient);
         }
 
         [HttpPut("UpdatePatient")]
         [MandatoryTransaction]
-        public async Task<List<PatientDTO>> UpdatePatient(int idPatient, PatientModel newPatient)
+        [Authorize]
+        public async Task<List<PatientDTO>> UpdatePatient(int idPatient, UpdatePatientModel newPatient)
         {
             return await _patientBusiness.UpdatePatient(idPatient, newPatient);
         }

@@ -9,7 +9,7 @@ namespace VacinaFacil.Api.Configuration
         {
             services.AddFluentValidation(c => c.RegisterValidatorsFromAssemblyContaining<InsertAppointmentValidator>());
             services.AddFluentValidation(c => c.RegisterValidatorsFromAssemblyContaining<UpdateAppointmentValidator>());
-            services.AddFluentValidation(c => c.RegisterValidatorsFromAssemblyContaining<PatientValidator>());
+            services.AddFluentValidation(c => c.RegisterValidatorsFromAssemblyContaining<InsertPatientValidator>());
         }
     }
 }
