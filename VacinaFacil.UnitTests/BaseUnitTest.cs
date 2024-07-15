@@ -1,7 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System.Security.Cryptography;
+using System.Text;
 using VacinaFacil.Entity.Entities;
 using VacinaFacil.Entity.Enum;
+using VacinaFacil.Entity.Model;
 using VacinaFacil.Repository;
 
 namespace VacinaFacil.UnitTests
@@ -44,7 +47,7 @@ namespace VacinaFacil.UnitTests
                 _context.Database.EnsureDeleted();
         }
 
-        public void AddAppointment(int idPatient, DateTime date, TimeSpan time, ScheduledEnum scheduled)
+        protected void AddAppointment(int idPatient, DateTime date, TimeSpan time, ScheduledEnum scheduled)
         {
             var appointment = new Appointment
             {
@@ -56,6 +59,23 @@ namespace VacinaFacil.UnitTests
             };
 
             _context.Add(appointment);
+        }
+
+        protected static Patient CreatePatient(InsertPatientModel newPatient)
+        {
+            var patient = new Patient
+            {
+                Name = newPatient.Name,
+                BirthDate = newPatient.BirthDate,
+                Email = newPatient.Email,
+                CriationDate = DateTime.Now
+            };
+
+            using var hmac = new HMACSHA512();
+            patient.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(newPatient.Password));
+            patient.PasswordSalt = hmac.Key;
+
+            return patient;
         }
     }
 }

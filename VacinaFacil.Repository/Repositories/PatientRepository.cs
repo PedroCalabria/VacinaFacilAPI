@@ -10,18 +10,6 @@ namespace VacinaFacil.Repository.Repositories
     {
         public PatientRepository(Context context) : base(context) { }
 
-        public Task<Patient> InsertPatient(PatientModel patient)
-        {
-            var newPatient = new Patient
-            {
-                Name = patient.Name,
-                BirthDate = patient.BirthDate,
-                CriationDate = DateTime.Now
-            };
-
-            return Insert(newPatient);
-        }
-
         public Task<List<PatientDTO>> ListAll()
         {
             var entity = EntitySet;
@@ -32,15 +20,16 @@ namespace VacinaFacil.Repository.Repositories
                     Id = patient.Id,
                     Name = patient.Name,
                     BirthDate = patient.BirthDate,
+                    Email = patient.Email,
                     CriationDate = patient.CriationDate
                 });
 
             return query.ToListAsync();
         }
 
-        public Task<Patient> getPatient(string name, DateTime birthDate)
+        public Task<Patient> getPatient(string email)
         {
-            return EntitySet.FirstOrDefaultAsync(p => p.Name == name && p.BirthDate == birthDate);
+            return EntitySet.FirstOrDefaultAsync(p => p.Email.ToLower() == email.ToLower());
         }
     }
 }

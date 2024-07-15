@@ -1,6 +1,5 @@
 ﻿using VacinaFacil.Business.Businesses;
 using VacinaFacil.Business.Interface.IBusinesses;
-using VacinaFacil.Entity.Entities;
 using VacinaFacil.Entity.Model;
 using VacinaFacil.Repository.Interface.IRepositories;
 using VacinaFacil.Repository.Repositories;
@@ -29,10 +28,12 @@ namespace VacinaFacil.UnitTests.InMemoryDataBase.AppointmentTests
         [Test]
         public void InsertPatient_Success()
         {
-            var patient = new PatientModel
+            var patient = new InsertPatientModel
             {
                 BirthDate = DateTime.Now.AddYears(-21),
                 Name = "Test",
+                Email = "test@Email",
+                Password = "password",
             };
 
             async Task action() => await _business.InsertPatient(patient);
@@ -43,18 +44,22 @@ namespace VacinaFacil.UnitTests.InMemoryDataBase.AppointmentTests
         [Test]
         public void InsertPatient_Existing_Patient()
         {
-            var patient = new Patient
+            var newPatient = new InsertPatientModel
             {
-                Id = 1,
                 BirthDate = DateTime.Now.Date.AddYears(-21),
                 Name = "Test",
-                CriationDate = DateTime.Now,
+                Email = "Test@email",
+                Password = "password",
             };
 
-            var newPatient = new PatientModel
+            var patient = CreatePatient(newPatient);
+
+            var existingPatient = new InsertPatientModel
             {
                 BirthDate = DateTime.Now.Date.AddYears(-21),
                 Name = "Test",
+                Email = "Test@email",
+                Password = "password",
             };
 
             _context.Add(patient);
@@ -64,7 +69,7 @@ namespace VacinaFacil.UnitTests.InMemoryDataBase.AppointmentTests
 
             var exception = Assert.ThrowsAsync<BusinessException>(action);
 
-            Assert.That(exception.Message, Is.EqualTo(string.Format(BusinessMessages.ExistingRecord, new { newPatient.Name, newPatient.BirthDate })));
+            Assert.That(exception.Message, Is.EqualTo(string.Format(BusinessMessages.ExistingRecord, existingPatient.Email)));
         }
     }
 }

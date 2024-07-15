@@ -1,6 +1,9 @@
 ﻿using log4net;
+using System.Security.Cryptography;
+using System.Text;
 using VacinaFacil.Business.Interface.IBusinesses;
 using VacinaFacil.Entity.DTO;
+using VacinaFacil.Entity.Entities;
 using VacinaFacil.Entity.Model;
 using VacinaFacil.Repository.Interface.IRepositories;
 using VacinaFacil.Utils.Exceptions;
@@ -34,20 +37,39 @@ namespace VacinaFacil.Business.Businesses
             return await _patientRepository.ListAll();
         }
 
-        public async Task<List<PatientDTO>> InsertPatient(PatientModel newPatient)
+        public async Task<List<PatientDTO>> InsertPatient(InsertPatientModel newPatient)
         {
-            var patient = await _patientRepository.getPatient(newPatient.Name, newPatient.BirthDate);
+            var patient = await _patientRepository.getPatient(newPatient.Email);
 
             if (patient != null)
             {
-                _log.InfoFormat(string.Format(BusinessMessages.ExistingRecord, new { newPatient.Name, newPatient.BirthDate }));
-                throw new BusinessException(string.Format(BusinessMessages.ExistingRecord, new { newPatient.Name, newPatient.BirthDate }));
+                _log.InfoFormat(string.Format(BusinessMessages.ExistingRecord, patient.Email));
+                throw new BusinessException(string.Format(BusinessMessages.ExistingRecord, patient.Email));
             }
 
-            await _patientRepository.InsertPatient(newPatient);
+            patient = CreatePatient(newPatient);
+
+            await _patientRepository.Insert(patient);
 
             _log.InfoFormat(BusinessMessages.SuccessfulOperation);
             return await _patientRepository.ListAll();
+        }
+
+        private static Patient CreatePatient(InsertPatientModel newPatient)
+        {
+            var patient = new Patient
+            {
+                Name = newPatient.Name,
+                BirthDate = newPatient.BirthDate,
+                Email = newPatient.Email,
+                CriationDate = DateTime.Now
+            };
+
+            using var hmac = new HMACSHA512();
+            patient.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(newPatient.Password));
+            patient.PasswordSalt = hmac.Key;
+
+            return patient;
         }
 
         public async Task<List<PatientDTO>> ListPatients()
@@ -55,7 +77,7 @@ namespace VacinaFacil.Business.Businesses
             return await _patientRepository.ListAll();
         }
 
-        public async Task<List<PatientDTO>> UpdatePatient(int idPatient, PatientModel newPatient)
+        public async Task<List<PatientDTO>> UpdatePatient(int idPatient, UpdatePatientModel newPatient)
         {
             var patient = await _patientRepository.getByID(idPatient);
 

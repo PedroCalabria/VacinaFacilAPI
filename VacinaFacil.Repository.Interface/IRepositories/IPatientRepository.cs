@@ -12,7 +12,6 @@ namespace VacinaFacil.Repository.Interface.IRepositories
     public interface IPatientRepository : IBaseRepository<Patient>
     {
         Task<List<PatientDTO>> ListAll();
-        Task<Patient> InsertPatient(PatientModel patient);
-        Task<Patient> getPatient(string name, DateTime birthDate);
+        Task<Patient> getPatient(string email);
     }
 }

@@ -121,13 +121,16 @@
     <value>Agendamento não está disponível para a data e horário especificado. </value>
   </data>
   <data name="EnumOutOfRange" xml:space="preserve">
-    <value>O campo {0} está fora do intervalo permitido.</value>
+    <value>O campo '{0}' está fora do intervalo permitido.</value>
   </data>
   <data name="ExistingAppointment" xml:space="preserve">
     <value>O usuário já tem um agendamento para o dia e horário especificado.</value>
   </data>
   <data name="ExistingRecord" xml:space="preserve">
     <value>Registro '{0}' já existe na base.</value>
+  </data>
+  <data name="InvalidEmailPassword" xml:space="preserve">
+    <value>O Email e/ou senha está inválido.</value>
   </data>
   <data name="InvalidField" xml:space="preserve">
     <value>O campo '{0}' está inválido.</value>
@@ -140,6 +143,9 @@
   </data>
   <data name="MaxSizeField" xml:space="preserve">
     <value>O campo '{0}' deve possuir no máximo {1} caracters.</value>
+  </data>
+  <data name="MaxValueField" xml:space="preserve">
+    <value>O valor do campo '{0}' deve ser no máximo {1}.</value>
   </data>
   <data name="MinDate" xml:space="preserve">
     <value>A data de {0} deve ser após {1}.</value>

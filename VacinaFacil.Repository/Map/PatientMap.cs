@@ -24,6 +24,18 @@ namespace VacinaFacil.Repository.Map
                 .HasColumnName("dat_nascimento")
                 .IsRequired();
 
+            builder.Property(e => e.Email)
+                .HasColumnName("dsc_email")
+                .IsRequired();
+
+            builder.Property(e => e.PasswordHash)
+               .HasColumnName("psw_hash")
+               .IsRequired();
+
+            builder.Property(e => e.PasswordSalt)
+                .HasColumnName("psw_salt")
+                .IsRequired();
+            
             builder.Property(e => e.CriationDate)
                 .HasColumnName("dat_criacao")
                 .IsRequired();

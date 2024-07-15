@@ -19,15 +19,15 @@ namespace VacinaFacil.Validator.Fluent
                 .GreaterThan(0).WithMessage(string.Format(BusinessMessages.MinValueField, "IdPatient", 1));
 
             RuleFor(appointment => appointment.AppointmentDate)
-                .NotEmpty().WithMessage(string.Format(BusinessMessages.MandatoryField, "AppointmentDate"))
-                .GreaterThanOrEqualTo(DateTime.Now.Date).WithMessage(string.Format(BusinessMessages.MinDate, "AppointmentDate", DateTime.Now.Date));
+                .NotEmpty().WithMessage(string.Format(BusinessMessages.MandatoryField, "Data do agendamento"))
+                .GreaterThanOrEqualTo(DateTime.Now.Date).WithMessage(string.Format(BusinessMessages.MinDate, "Data do agendamento", DateTime.Now.Date));
 
             RuleFor(appointment => appointment.AppointmentTime)
-                .NotEmpty().WithMessage(string.Format(BusinessMessages.MandatoryField, "AppointmentTime"));
+                .NotEmpty().WithMessage(string.Format(BusinessMessages.MandatoryField, "Hora do agendamento"));
 
             RuleFor(appointment => appointment.Scheduled)
-                .NotEmpty().WithMessage(string.Format(BusinessMessages.MandatoryField, "Scheduled"))
-                .IsInEnum().WithMessage(string.Format(BusinessMessages.EnumOutOfRange, "Scheduled"));
+                .NotEmpty().WithMessage(string.Format(BusinessMessages.MandatoryField, "Agendado"))
+                .IsInEnum().WithMessage(string.Format(BusinessMessages.EnumOutOfRange, "Agendado"));
         }
     }
 }
