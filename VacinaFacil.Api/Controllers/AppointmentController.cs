@@ -11,10 +11,12 @@ namespace VacinaFacil.Api.Controllers
     public class AppointmentController : ControllerBase
     {
         private readonly IAppointmentBusiness _appointmentBusiness;
+        private readonly IAppointmentPatientBusiness _appointmentpatientBusiness;
 
-        public AppointmentController(IAppointmentBusiness appointmentBusiness)
+        public AppointmentController(IAppointmentBusiness appointmentBusiness, IAppointmentPatientBusiness appointmentpatientBusiness)
         {
             _appointmentBusiness = appointmentBusiness;
+            _appointmentpatientBusiness = appointmentpatientBusiness;
         }
 
         [HttpDelete("DeleteAppointment")]
@@ -28,6 +30,18 @@ namespace VacinaFacil.Api.Controllers
         public async Task<List<GroupedAppointmentDTO>> GetListAppointments()
         {
             return await _appointmentBusiness.ListAppointments();
+        }
+        
+        [HttpGet("GetListAppointmentsPatients")]
+        public async Task<List<GroupedAppointmentPatientDTO>> GetListAppointmentsPatients()
+        {
+            return await _appointmentpatientBusiness.ListAppointments();
+        }
+        
+        [HttpGet("GetListAppointmentsPatientsByDate")]
+        public async Task<List<GroupedAppointmentPatientDTO>> GetListAppointmentsPatientsByDate(DateTime date)
+        {
+            return await _appointmentpatientBusiness.ListAppointmentsByDate(date);
         }
 
         [HttpGet("GetListAppointmentsByDate")]
@@ -45,9 +59,9 @@ namespace VacinaFacil.Api.Controllers
 
         [HttpPut("UpdateAppointment")]
         [MandatoryTransaction]
-        public async Task<List<GroupedAppointmentDTO>> UpdateAppointment(int idAppointment, UpdateAppointmentModel newAppointment)
+        public async Task<List<GroupedAppointmentDTO>> UpdateAppointment(UpdateAppointmentModelFull newAppointment)
         {
-            return await _appointmentBusiness.UpdateAppointment(idAppointment, newAppointment);
+            return await _appointmentBusiness.UpdateAppointment(newAppointment.IdAppointment, newAppointment.newAppointment);
         }
     }
 }

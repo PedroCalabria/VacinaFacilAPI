@@ -27,7 +27,7 @@ namespace VacinaFacil.Repository.Repositories
                         AppointmentDate = a.AppointmentDate,
                         AppointmentTime = a.AppointmentTime,
                         Scheduled = a.Scheduled,
-                        CriationDate = a.CriationDate,
+                        CreationDate = a.CreationDate,
                     }).ToList(),
                     Count = g.Count()
                 });
@@ -52,7 +52,7 @@ namespace VacinaFacil.Repository.Repositories
                                         AppointmentDate = a.AppointmentDate,
                                         AppointmentTime = a.AppointmentTime,
                                         Scheduled = a.Scheduled,
-                                        CriationDate = a.CriationDate,
+                                        CreationDate = a.CreationDate,
                                     }).ToList(),
                     Count = g.Count()
                 });
@@ -68,10 +68,12 @@ namespace VacinaFacil.Repository.Repositories
                 AppointmentDate = appointment.AppointmentDate,
                 AppointmentTime = appointment.AppointmentTime,
                 Scheduled = appointment.Scheduled,
-                CriationDate = DateTime.Now
+                CreationDate = DateTime.Now
             };
 
             return Insert(newAppointment);
         }
+
+        public DbSet<Appointment> GetEntitySet() { return EntitySet; }
     }
 }

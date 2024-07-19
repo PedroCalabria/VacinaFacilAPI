@@ -33,7 +33,7 @@ namespace VacinaFacil.Repository.Map
                 .HasConversion<string>()
                 .IsRequired();
 
-            builder.Property(e => e.CriationDate)
+            builder.Property(e => e.CreationDate)
                 .HasColumnName("dat_criacao")
                 .IsRequired();
         }

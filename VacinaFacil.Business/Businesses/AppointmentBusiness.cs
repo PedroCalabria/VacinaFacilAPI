@@ -66,12 +66,24 @@ namespace VacinaFacil.Business.Businesses
                 throw new BusinessException(BusinessMessages.RecordNotFound);
             }
 
-            await CheckAppointmentAvailability(newAppointment.AppointmentDate, newAppointment.AppointmentTime);
+            if (appointment.AppointmentDate == newAppointment.AppointmentDate && appointment.AppointmentTime == newAppointment.AppointmentTime)
+            {
+                if (appointment.Scheduled == newAppointment.Scheduled)
+                {
+                    _log.InfoFormat(string.Format(BusinessMessages.ExistingAppointment));
+                    throw new BusinessException(string.Format(BusinessMessages.ExistingAppointment));
+                }
+            }
+            else
+            {
+                await CheckAppointmentAvailability(newAppointment.AppointmentDate, newAppointment.AppointmentTime);
+            }
+
 
             appointment.AppointmentDate = newAppointment.AppointmentDate;
             appointment.AppointmentTime = newAppointment.AppointmentTime;
             appointment.Scheduled = newAppointment.Scheduled;
-            appointment.CriationDate = DateTime.Now;
+            appointment.CreationDate = DateTime.Now;
 
             await _appointmentRepository.Update(appointment);
 

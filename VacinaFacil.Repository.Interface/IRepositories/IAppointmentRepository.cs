@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,5 +15,6 @@ namespace VacinaFacil.Repository.Interface.IRepositories
         Task<List<GroupedAppointmentDTO>> ListAll();
         Task<List<GroupedAppointmentDTO>> ListByDate(DateTime date);
         Task<Appointment> InsertAppointment(InsertAppointmentModel appointment);
+        DbSet<Appointment> GetEntitySet();
     }
 }

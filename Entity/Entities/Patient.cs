@@ -10,7 +10,10 @@ namespace VacinaFacil.Entity.Entities
     {
         public string Name { get; set; }
         public DateTime BirthDate { get; set; }
-        public DateTime CriationDate { get; set; }
+        public DateTime CreationDate { get; set; }
+        public string Email { get; set; }
+        public byte[] PasswordHash { get; set; }
+        public byte[] PasswordSalt { get; set; }
 
         public Patient() { }
     }
