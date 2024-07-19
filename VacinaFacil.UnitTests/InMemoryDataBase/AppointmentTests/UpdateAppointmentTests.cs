@@ -75,6 +75,69 @@ namespace VacinaFacil.UnitTests.InMemoryDataBase
                 Assert.That(exception.Message, Is.EqualTo(BusinessMessages.RecordNotFound));
             }
 
+            [Test]
+            public void UpdateAppoinment_Existing_Appointment_Agendado()
+            {
+                var newAppointment = new UpdateAppointmentModel
+                {
+                    AppointmentDate = DateTime.Now.Date,
+                    AppointmentTime = new TimeSpan(11, 0, 0),
+                    Scheduled = ScheduledEnum.Agendado
+                };
+
+                AddAppointment(1, DateTime.Now.Date, new TimeSpan(11, 0, 0), ScheduledEnum.Agendado);
+
+                _context.SaveChanges();
+
+                async Task action() => await _business.UpdateAppointment(1, newAppointment);
+
+                var exception = Assert.ThrowsAsync<BusinessException>(action);
+
+                Assert.That(exception.Message, Is.EqualTo(BusinessMessages.ExistingAppointment));
+            }
+            
+            [Test]
+            public void UpdateAppoinment_Existing_Appointment_Realizado()
+            {
+                var newAppointment = new UpdateAppointmentModel
+                {
+                    AppointmentDate = DateTime.Now.Date,
+                    AppointmentTime = new TimeSpan(11, 0, 0),
+                    Scheduled = ScheduledEnum.Realizado
+                };
+
+                AddAppointment(1, DateTime.Now.Date, new TimeSpan(11, 0, 0), ScheduledEnum.Realizado);
+
+                _context.SaveChanges();
+
+                async Task action() => await _business.UpdateAppointment(1, newAppointment);
+
+                var exception = Assert.ThrowsAsync<BusinessException>(action);
+
+                Assert.That(exception.Message, Is.EqualTo(BusinessMessages.ExistingAppointment));
+            }
+
+            [Test]
+            public void UpdateAppoinment_Existing_Appointment_NaoRealizado()
+            {
+                var newAppointment = new UpdateAppointmentModel
+                {
+                    AppointmentDate = DateTime.Now.Date,
+                    AppointmentTime = new TimeSpan(11, 0, 0),
+                    Scheduled = ScheduledEnum.NaoRealizado,
+                };
+
+                AddAppointment(1, DateTime.Now.Date, new TimeSpan(11, 0, 0), ScheduledEnum.NaoRealizado);
+
+                _context.SaveChanges();
+
+                async Task action() => await _business.UpdateAppointment(1, newAppointment);
+
+                var exception = Assert.ThrowsAsync<BusinessException>(action);
+
+                Assert.That(exception.Message, Is.EqualTo(BusinessMessages.ExistingAppointment));
+            }
+
             [TestCase(ScheduledEnum.Agendado)]
             [TestCase(ScheduledEnum.Realizado)]
             [TestCase(ScheduledEnum.NaoRealizado)]
