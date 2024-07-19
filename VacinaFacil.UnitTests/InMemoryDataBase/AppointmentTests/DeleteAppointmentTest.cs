@@ -39,7 +39,7 @@ namespace VacinaFacil.UnitTests.InMemoryDataBase.AppointmentTests
                 AppointmentDate = DateTime.Now.Date,
                 AppointmentTime = new TimeSpan(10, 0, 0),
                 Scheduled = scheduled,
-                CriationDate = DateTime.Now
+                CreationDate = DateTime.Now
             };
 
             _context.Add(appointment);

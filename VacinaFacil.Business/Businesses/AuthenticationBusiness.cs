@@ -70,6 +70,7 @@ namespace VacinaFacil.Business.Businesses
                 new(ClaimTypes.Sid, patient.Id.ToString()),
                 new(ClaimTypes.Name, patient.Name),
                 new(ClaimTypes.Email, patient.Email),
+                new("birthDate", patient.BirthDate.ToString()),
                 new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 
@@ -92,7 +93,8 @@ namespace VacinaFacil.Business.Businesses
             var claims = new List<Claim>
             {
                 new(ClaimTypes.Sid, patient.Id.ToString()),
-                new("email", patient.Email),
+                new(ClaimTypes.Email, patient.Email),
+                new("birthDate", patient.BirthDate.ToString()),
                 new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
 

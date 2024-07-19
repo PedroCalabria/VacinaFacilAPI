@@ -39,7 +39,7 @@ namespace ControleTarefas.WebApi.Middleware
 
         private static JwtSecurityToken GetSecurityToken(HttpContext context)
         {
-            var authToken = context.Request.Headers["Authorization"].String();
+            var authToken = context.Request.Headers["Authorization"].ToString();
 
             if (authToken != null && authToken.Trim().Length > 0)
             {
@@ -75,10 +75,12 @@ namespace ControleTarefas.WebApi.Middleware
                 var id = securityToken.Claims.GetClaimValue(ClaimTypes.Sid);
                 var name = securityToken.Claims.GetClaimValue(ClaimTypes.Name);
                 var email = securityToken.Claims.GetClaimValue(ClaimTypes.Email);
+                var birthDate = securityToken.Claims.GetClaimValue("birthDate");
 
                 _patientContext.AddData("id", id);
                 _patientContext.AddData("name", name);
                 _patientContext.AddData("email", email);
+                _patientContext.AddData("birthDate", birthDate);
             }
         }
 

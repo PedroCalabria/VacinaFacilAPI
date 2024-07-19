@@ -21,7 +21,7 @@ namespace VacinaFacil.Repository.Repositories
                     Name = patient.Name,
                     BirthDate = patient.BirthDate,
                     Email = patient.Email,
-                    CriationDate = patient.CriationDate
+                    CreationDate = patient.CreationDate
                 });
 
             return query.ToListAsync();
@@ -31,5 +31,7 @@ namespace VacinaFacil.Repository.Repositories
         {
             return EntitySet.FirstOrDefaultAsync(p => p.Email.ToLower() == email.ToLower());
         }
+
+        public DbSet<Patient> GetEntitySet() { return EntitySet; }
     }
 }

@@ -62,7 +62,7 @@ namespace VacinaFacil.Business.Businesses
                 Name = newPatient.Name,
                 BirthDate = newPatient.BirthDate,
                 Email = newPatient.Email,
-                CriationDate = DateTime.Now
+                CreationDate = DateTime.Now
             };
 
             using var hmac = new HMACSHA512();
@@ -89,7 +89,7 @@ namespace VacinaFacil.Business.Businesses
 
             patient.Name = newPatient.Name;
             patient.BirthDate = newPatient.BirthDate;
-            patient.CriationDate = DateTime.Now;
+            patient.CreationDate = DateTime.Now;
 
             await _patientRepository.Update(patient);
 

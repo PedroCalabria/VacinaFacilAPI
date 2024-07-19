@@ -55,7 +55,7 @@ namespace VacinaFacil.UnitTests
                 AppointmentDate = date,
                 AppointmentTime = time,
                 Scheduled = scheduled,
-                CriationDate = DateTime.Now
+                CreationDate = DateTime.Now
             };
 
             _context.Add(appointment);
@@ -68,7 +68,7 @@ namespace VacinaFacil.UnitTests
                 Name = newPatient.Name,
                 BirthDate = newPatient.BirthDate,
                 Email = newPatient.Email,
-                CriationDate = DateTime.Now
+                CreationDate = DateTime.Now
             };
 
             using var hmac = new HMACSHA512();

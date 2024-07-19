@@ -8,7 +8,7 @@ namespace VacinaFacil.Entity.Entities
         public DateTime AppointmentDate { get; set; }
         public TimeSpan AppointmentTime { get; set; }
         public ScheduledEnum Scheduled { get; set; }
-        public DateTime CriationDate { get; set; }
+        public DateTime CreationDate { get; set; }
 
         public Appointment() { }
     }

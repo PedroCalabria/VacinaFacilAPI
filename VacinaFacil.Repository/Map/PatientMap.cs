@@ -36,7 +36,7 @@ namespace VacinaFacil.Repository.Map
                 .HasColumnName("psw_salt")
                 .IsRequired();
             
-            builder.Property(e => e.CriationDate)
+            builder.Property(e => e.CreationDate)
                 .HasColumnName("dat_criacao")
                 .IsRequired();
         }

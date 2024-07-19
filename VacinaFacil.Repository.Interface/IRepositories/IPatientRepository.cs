@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,5 +14,6 @@ namespace VacinaFacil.Repository.Interface.IRepositories
     {
         Task<List<PatientDTO>> ListAll();
         Task<Patient> getPatient(string email);
+        DbSet<Patient> GetEntitySet();
     }
 }

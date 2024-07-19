@@ -7,10 +7,12 @@ using VacinaFacil.Entity.Enum;
 
 namespace VacinaFacil.Entity.DTO
 {
-    public class AppointmentDTO
+    public class AppointmentPatientDTO
     {
         public int Id { get; set; }
-        public int IdPatient { get; set; }
+        public string Name { get; set; }
+        public DateTime BirthDate { get; set; }
+        public string Email { get; set; }
         public DateTime AppointmentDate { get; set; }
         public TimeSpan AppointmentTime { get; set; }
         public ScheduledEnum Scheduled { get; set; }

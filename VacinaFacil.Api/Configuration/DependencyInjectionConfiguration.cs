@@ -34,12 +34,14 @@ namespace VacinaFacil.Api.Configuration
         {
             services.AddScoped<IAppointmentRepository, AppointmentRepository>();
             services.AddScoped<IPatientRepository, PatientRepository>();
+            services.AddScoped<IAppointmentPatientRepository, AppointmentPatientRepository>();
         }
 
         private static void InjectBusinesses(IServiceCollection services)
         {
             services.AddScoped<IAppointmentBusiness, AppointmentBusiness>();
             services.AddScoped<IPatientBusiness, PatientBusiness>();
+            services.AddScoped<IAppointmentPatientBusiness, AppointmentPatientBusiness>();
             services.AddScoped<IAuthenticationBusiness, AuthenticationBusiness>();
         }
     }
