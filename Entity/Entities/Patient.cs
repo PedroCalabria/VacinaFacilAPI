@@ -15,6 +15,11 @@ namespace VacinaFacil.Entity.Entities
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
 
-        public Patient() { }
+        public List<Appointment> Appointments { get; set; }
+
+        public Patient()
+        {
+            Appointments = new List<Appointment>();
+        }
     }
 }

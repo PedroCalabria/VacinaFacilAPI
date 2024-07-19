@@ -10,6 +10,8 @@ namespace VacinaFacil.Entity.Entities
         public ScheduledEnum Scheduled { get; set; }
         public DateTime CreationDate { get; set; }
 
+        public Patient Patient { get; set; }
+
         public Appointment() { }
     }
 }

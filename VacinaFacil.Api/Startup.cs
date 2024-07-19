@@ -31,10 +31,10 @@ namespace VacinaFacil.Api
                 c.MapType(typeof(TimeSpan), () => new() { Type = "string", Example = new OpenApiString("00:00:00") });
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "Controle de Tarefas",
+                    Title = "VacinaFacil",
                     Version = "v1",
-                    Description = "APIs de estudo em dotnet core 6.",
-                    Contact = new() { Name = "Danilo Queiroga", Url = new Uri("http://google.com.br") },
+                    Description = "APIs para o portal VacinaFacil.",
+                    Contact = new() { Name = "Pedro Calábria", Url = new Uri("http://google.com.br") },
                     License = new() { Name = "Private", Url = new Uri("http://google.com.br") },
                     TermsOfService = new Uri("http://google.com.br")
                 });
