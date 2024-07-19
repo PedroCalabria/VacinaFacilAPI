@@ -36,6 +36,11 @@ namespace VacinaFacil.Repository.Map
             builder.Property(e => e.CreationDate)
                 .HasColumnName("dat_criacao")
                 .IsRequired();
+
+            builder.HasOne(e => e.Patient)
+                .WithMany(p => p.Appointments)
+                .HasForeignKey(e => e.Id)
+                .OnDelete(DeleteBehavior.ClientCascade);
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VacinaFacil.Entity.Entities;
 
 namespace VacinaFacil.Entity.DTO
 {
@@ -12,6 +13,6 @@ namespace VacinaFacil.Entity.DTO
         public string Name { get; set; }
         public DateTime BirthDate { get; set; }
         public string Email { get; set; }
-        public DateTime CriationDate { get; set; }
+        public DateTime CreationDate { get; set; }
     }
 }
