@@ -3,17 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VacinaFacil.Api", "VacinaFacil\VacinaFacil.Api.csproj", "{A5E383D8-4522-426E-BB29-6E99D59D12AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VacinaFacil.Repository", "VacinaFacil.Repository\VacinaFacil.Repository.csproj", "{2DF72CE3-2628-4443-ACAD-BA80580A3048}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VacinaFacil.Repository", "VacinaFacil.Repository\VacinaFacil.Repository.csproj", "{2DF72CE3-2628-4443-ACAD-BA80580A3048}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VacinaFacil.Repository.Interface", "VacinaFacil.Repository.Interface\VacinaFacil.Repository.Interface.csproj", "{B70191A1-44F4-4C0A-8B94-0CEE1841786F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VacinaFacil.Repository.Interface", "VacinaFacil.Repository.Interface\VacinaFacil.Repository.Interface.csproj", "{B70191A1-44F4-4C0A-8B94-0CEE1841786F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VacinaFacil.Business", "VacinaFacil.Business\VacinaFacil.Business.csproj", "{A15B5923-D588-4CF4-BCBA-9DF8E7DF7D8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VacinaFacil.Business", "VacinaFacil.Business\VacinaFacil.Business.csproj", "{A15B5923-D588-4CF4-BCBA-9DF8E7DF7D8E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VacinaFacil.Business.Interface", "VacinaFacil.Business.Interface\VacinaFacil.Business.Interface.csproj", "{66FBC0E7-4F25-47DB-9E30-2B52A0C392A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VacinaFacil.Business.Interface", "VacinaFacil.Business.Interface\VacinaFacil.Business.Interface.csproj", "{66FBC0E7-4F25-47DB-9E30-2B52A0C392A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VacinaFacil.Entity", "Entity\VacinaFacil.Entity.csproj", "{3A64261E-65C3-4EA8-811B-0F8CB43C4A7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VacinaFacil.Entity", "Entity\VacinaFacil.Entity.csproj", "{3A64261E-65C3-4EA8-811B-0F8CB43C4A7E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VacinaFacil.Api", "VacinaFacil.Api\VacinaFacil.Api.csproj", "{C86F992A-DD8B-43EF-BD55-FD97058AFB80}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VacinaFacil.Utils", "VacinaFacil.Utils\VacinaFacil.Utils.csproj", "{8AC23750-7599-4180-ABFF-D1DE659309AF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VacinaFacil.Validator", "VacinaFacil.Validator\VacinaFacil.Validator.csproj", "{65CBEF57-B277-49FA-B50A-1ADDFF86F47C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VacinaFacil.UnitTests", "VacinaFacil.UnitTests\VacinaFacil.UnitTests.csproj", "{8240B565-3976-4191-9919-389163D352DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +27,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A5E383D8-4522-426E-BB29-6E99D59D12AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A5E383D8-4522-426E-BB29-6E99D59D12AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A5E383D8-4522-426E-BB29-6E99D59D12AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A5E383D8-4522-426E-BB29-6E99D59D12AD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2DF72CE3-2628-4443-ACAD-BA80580A3048}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2DF72CE3-2628-4443-ACAD-BA80580A3048}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2DF72CE3-2628-4443-ACAD-BA80580A3048}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +47,22 @@ Global
 		{3A64261E-65C3-4EA8-811B-0F8CB43C4A7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A64261E-65C3-4EA8-811B-0F8CB43C4A7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A64261E-65C3-4EA8-811B-0F8CB43C4A7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C86F992A-DD8B-43EF-BD55-FD97058AFB80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C86F992A-DD8B-43EF-BD55-FD97058AFB80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C86F992A-DD8B-43EF-BD55-FD97058AFB80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C86F992A-DD8B-43EF-BD55-FD97058AFB80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AC23750-7599-4180-ABFF-D1DE659309AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AC23750-7599-4180-ABFF-D1DE659309AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AC23750-7599-4180-ABFF-D1DE659309AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AC23750-7599-4180-ABFF-D1DE659309AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65CBEF57-B277-49FA-B50A-1ADDFF86F47C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65CBEF57-B277-49FA-B50A-1ADDFF86F47C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65CBEF57-B277-49FA-B50A-1ADDFF86F47C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65CBEF57-B277-49FA-B50A-1ADDFF86F47C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8240B565-3976-4191-9919-389163D352DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8240B565-3976-4191-9919-389163D352DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8240B565-3976-4191-9919-389163D352DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8240B565-3976-4191-9919-389163D352DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,7 +7,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Businesses\" />
+	  <PackageReference Include="log4net" Version="2.0.17" />
+	  <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.29" />
+	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Entity\VacinaFacil.Entity.csproj" />
+    <ProjectReference Include="..\VacinaFacil.Business.Interface\VacinaFacil.Business.Interface.csproj" />
+    <ProjectReference Include="..\VacinaFacil.Repository.Interface\VacinaFacil.Repository.Interface.csproj" />
+    <ProjectReference Include="..\VacinaFacil.Utils\VacinaFacil.Utils.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="VacinaFacil.Entity">
+      <HintPath>..\Entity\obj\Debug\net6.0\ref\VacinaFacil.Entity.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
