@@ -96,7 +96,7 @@ namespace VacinaFacil.Business.Businesses
             var appointments = await _appointmentRepository.ListByDate(date);
 
             var patientHasAppointmentAtTime = appointments
-                .Exists(a => a.AppointmentTime == time && a.Appointments.Any(app => app.IdPatient == idPatient));
+                .Exists(a => a.AppointmentTime == time && a.Appointments.Exists(app => app.IdPatient == idPatient));
 
             if (patientHasAppointmentAtTime)
             {
