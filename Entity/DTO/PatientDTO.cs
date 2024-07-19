@@ -12,6 +12,6 @@ namespace VacinaFacil.Entity.DTO
         public string Name { get; set; }
         public DateTime BirthDate { get; set; }
         public string Email { get; set; }
-        public DateTime CriationDate { get; set; }
+        public DateTime CreationDate { get; set; }
     }
 }

@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Entity\VacinaFacil.Entity.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="VacinaFacil.Entity">
       <HintPath>..\Entity\obj\Debug\net6.0\ref\VacinaFacil.Entity.dll</HintPath>
     </Reference>

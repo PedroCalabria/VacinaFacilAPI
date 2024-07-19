@@ -13,12 +13,10 @@ namespace VacinaFacil.Api.Controllers
     public class AppointmentController : ControllerBase
     {
         private readonly IAppointmentBusiness _appointmentBusiness;
-        private readonly IAppointmentPatientBusiness _appointmentpatientBusiness;
 
-        public AppointmentController(IAppointmentBusiness appointmentBusiness, IAppointmentPatientBusiness appointmentpatientBusiness)
+        public AppointmentController(IAppointmentBusiness appointmentBusiness)
         {
             _appointmentBusiness = appointmentBusiness;
-            _appointmentpatientBusiness = appointmentpatientBusiness;
         }
 
         [HttpDelete("DeleteAppointment")]
@@ -32,18 +30,6 @@ namespace VacinaFacil.Api.Controllers
         public async Task<List<GroupedAppointmentDTO>> GetListAppointments()
         {
             return await _appointmentBusiness.ListAppointments();
-        }
-        
-        [HttpGet("GetListAppointmentsPatients")]
-        public async Task<List<GroupedAppointmentPatientDTO>> GetListAppointmentsPatients()
-        {
-            return await _appointmentpatientBusiness.ListAppointments();
-        }
-        
-        [HttpGet("GetListAppointmentsPatientsByDate")]
-        public async Task<List<GroupedAppointmentPatientDTO>> GetListAppointmentsPatientsByDate(DateTime date)
-        {
-            return await _appointmentpatientBusiness.ListAppointmentsByDate(date);
         }
 
         [HttpGet("GetListAppointmentsByDate")]
