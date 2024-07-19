@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using VacinaFacil.Business.Interface.IBusinesses;
 using VacinaFacil.Entity.DTO;
 using VacinaFacil.Entity.Model;
@@ -7,6 +8,7 @@ using VacinaFacil.Utils.Attributes;
 namespace VacinaFacil.Api.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("api/[controller]")]
     public class AppointmentController : ControllerBase
     {

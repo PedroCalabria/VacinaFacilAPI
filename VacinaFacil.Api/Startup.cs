@@ -1,4 +1,5 @@
-﻿using Microsoft.OpenApi.Any;
+﻿using ControleTarefas.WebApi.Middleware;
+using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using VacinaFacil.Api.Configuration;
 using VacinaFacil.Api.Middleware;
@@ -17,11 +18,13 @@ namespace VacinaFacil.Api
         {
             services.AddControllers();
 
-            services.AddDependencyInjectionConfiguration();
+            services.AddDependencyInjectionConfiguration(Configuration);
 
             services.AddDatabaseConfiguration(Configuration);
 
             services.AddFluentConfiguration();
+
+            services.AddAuthorizationConfiguration(Configuration);
 
             services.AddSwaggerGen(c =>
             {
@@ -68,6 +71,7 @@ namespace VacinaFacil.Api
             app.UseAuthorization();
 
             app.UseMiddleware<ApiMiddleware>();
+            app.UseMiddleware<PatientContextMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

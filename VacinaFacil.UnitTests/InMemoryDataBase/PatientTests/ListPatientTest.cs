@@ -33,24 +33,17 @@ namespace VacinaFacil.UnitTests.InMemoryDataBase.AppointmentTests
         [Test]
         public void ListPatients_Success()
         {
-            var patient = new Patient
+            var newPatient = new InsertPatientModel
             {
-                Id = 1,
                 BirthDate = DateTime.Now.Date.AddYears(-21),
                 Name = "Test",
-                CriationDate = DateTime.Now,
+                Email = "Test@email",
+                Password = "password",
             };
 
-            var patient2 = new Patient
-            {
-                Id = 2,
-                BirthDate = DateTime.Now.Date.AddYears(-18),
-                Name = "Test",
-                CriationDate = DateTime.Now,
-            };
+            var patient = CreatePatient(newPatient);
 
             _context.Add(patient);
-            _context.Add(patient2);
             _context.SaveChanges();
 
             async Task action() => await _business.ListPatients();

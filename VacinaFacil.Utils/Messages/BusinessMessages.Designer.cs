@@ -70,7 +70,7 @@ namespace VacinaFacil.Utils.Messages {
         }
         
         /// <summary>
-        ///   Consulta uma cadeia de caracteres localizada semelhante a O campo {0} está fora do intervalo permitido..
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O campo &apos;{0}&apos; está fora do intervalo permitido..
         /// </summary>
         public static string EnumOutOfRange {
             get {
@@ -93,6 +93,15 @@ namespace VacinaFacil.Utils.Messages {
         public static string ExistingRecord {
             get {
                 return ResourceManager.GetString("ExistingRecord", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O Email e/ou senha está inválido..
+        /// </summary>
+        public static string InvalidEmailPassword {
+            get {
+                return ResourceManager.GetString("InvalidEmailPassword", resourceCulture);
             }
         }
         
@@ -129,6 +138,15 @@ namespace VacinaFacil.Utils.Messages {
         public static string MaxSizeField {
             get {
                 return ResourceManager.GetString("MaxSizeField", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O valor do campo &apos;{0}&apos; deve ser no máximo {1}..
+        /// </summary>
+        public static string MaxValueField {
+            get {
+                return ResourceManager.GetString("MaxValueField", resourceCulture);
             }
         }
         

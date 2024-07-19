@@ -1,7 +1,5 @@
 ﻿using VacinaFacil.Business.Businesses;
 using VacinaFacil.Business.Interface.IBusinesses;
-using VacinaFacil.Entity.Entities;
-using VacinaFacil.Entity.Enum;
 using VacinaFacil.Entity.Model;
 using VacinaFacil.Repository.Interface.IRepositories;
 using VacinaFacil.Repository.Repositories;
@@ -30,13 +28,15 @@ namespace VacinaFacil.UnitTests.InMemoryDataBase.AppointmentTests
         [Test]
         public void DeletePatient_Success()
         {
-            var patient = new Patient
+            var newPatient = new InsertPatientModel
             {
-                Id = 1,
-                BirthDate = DateTime.Now.AddYears(-21),
+                BirthDate = DateTime.Now.Date.AddYears(-21),
                 Name = "Test",
-                CriationDate = DateTime.Now,
+                Email = "Test@email",
+                Password = "password",
             };
+
+            var patient = CreatePatient(newPatient);
 
             _context.Add(patient);
 

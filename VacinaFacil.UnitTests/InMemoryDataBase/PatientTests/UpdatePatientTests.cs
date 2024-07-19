@@ -39,24 +39,27 @@ namespace VacinaFacil.UnitTests.InMemoryDataBase
             [Test]
             public void UpdateAppoinment_Success()
             {
-                var patient = new Patient
+                var newPatient = new InsertPatientModel
                 {
-                    Id = 1,
-                    BirthDate = DateTime.Now.AddYears(-21),
+                    BirthDate = DateTime.Now.Date.AddYears(-21),
                     Name = "Test",
-                    CriationDate = DateTime.Now,
+                    Email = "Test@email",
+                    Password = "password",
                 };
 
-                var newPatient = new PatientModel
+                var patient = CreatePatient(newPatient);
+
+                var updatePatient = new UpdatePatientModel
                 {
                     Name = "Test2",
                     BirthDate = DateTime.Now.AddYears(-18),
+                    Email = "Test@email"
                 };
 
                 _context.Add(patient);
                 _context.SaveChanges();
 
-                async Task action() => await _business.UpdatePatient(1, newPatient);
+                async Task action() => await _business.UpdatePatient(1, updatePatient);
 
                 Assert.DoesNotThrowAsync(action);
             }
@@ -64,10 +67,11 @@ namespace VacinaFacil.UnitTests.InMemoryDataBase
             [Test]
             public void UpdatePatient_Non_Existing_Patient()
             {
-                var newPatient = new PatientModel
+                var newPatient = new UpdatePatientModel
                 {
                     Name = "Test2",
                     BirthDate = DateTime.Now.AddYears(-18),
+                    Email = "Test@email",
                 };
 
                 async Task action() => await _business.UpdatePatient(1, newPatient);
